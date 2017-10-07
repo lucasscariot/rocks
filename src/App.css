@@ -38,11 +38,6 @@
   border-radius: 3px;
 }
 
-.game-board .square:active {
-  box-shadow:0px 0px 0px 5px white inset;
-  border-radius: 7px;
-}
-
 .game-board .active {
   background-color: rgb(198, 228, 139);
   color: #f1f1f1;
