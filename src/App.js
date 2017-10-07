@@ -18,11 +18,11 @@ class Board extends Component {
     super();
     this.state = {
       level: 0,
-      squares: Array(5).fill(false).map(x => Array(7).fill(false)),
+      clicks: 0,
+      squares: Array(5).fill(false).map(x => Array(7).fill(0)),
+      final: levels[0],
       isWin: false
     };
-
-    this.state.final = levels[this.state.level];
 
     this.checkResult = this.checkResult.bind(this);
     this.resetBoard = this.resetBoard.bind(this);
@@ -32,15 +32,16 @@ class Board extends Component {
     if (x >= 5 || y >= 7) { return; }
     if (0 > x || 0 > y) { return; }
     if (squares[x][y]) {
-      squares[x][y] = false;
+      squares[x][y] = 0;
     } else {
-      squares[x][y] = true;
+      squares[x][y] = 1;
     }
   }
 
   resetBoard() {
     this.setState({
-      squares: Array(5).fill(false).map(x => Array(7).fill(false))
+      squares: Array(5).fill(false).map(x => Array(7).fill(0)),
+      isWin: false
     });
   }
 
@@ -54,7 +55,10 @@ class Board extends Component {
     this.toggleSquare(squares, x - 1, y);
     this.toggleSquare(squares, x, y + 1);
     this.toggleSquare(squares, x, y - 1);
-    this.setState({squares: squares});
+    this.setState({
+      squares: squares,
+      clicks: this.state.clicks + 1
+    });
     this.checkResult();
   }
   
@@ -203,6 +207,11 @@ class Board extends Component {
               {this.renderSquare(4, 5)}
               {this.renderSquare(4, 6)}
             </div>
+          </div>
+          <div className="data">
+            <p>Click: {this.state.clicks}</p>
+            <p><a onClick={() => this.resetBoard()}>Reset board</a></p>
+            <p>Level: {this.state.level}</p>
           </div>
         </div>
       </div>

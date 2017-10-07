@@ -25,6 +25,12 @@
   width: 100%;
 }
 
+.data {
+  display: flex;
+  justify-content: space-around;
+  color: #c3c2c2;
+}
+
 .game-board .square {
   height: 80px;
   width: 80px;
