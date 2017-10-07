@@ -5,6 +5,15 @@
   height: 100vh;
 }
 
+.game a {
+  color:  rgb(35, 154, 59);
+  cursor: pointer;
+}
+
+.game a:hover {
+  text-decoration: underline;
+}
+
 .game-board {
   padding: 10px;
   border: 2px solid #f1f1f1;
@@ -14,11 +23,6 @@
 .board-row {
   display: flex;
   width: 100%;
-}
-
-.test {
-  font-size: 32px;
-  color: red;
 }
 
 .game-board .square {

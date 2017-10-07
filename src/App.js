@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import levels from './levels.json';
 import _ from 'lodash';
 import './App.css';
 
@@ -15,21 +16,16 @@ class Square extends Component {
 class Board extends Component {
   constructor() {
     super();
-    const size = 8;
     this.state = {
-      size: size,
+      level: 0,
       squares: Array(5).fill(false).map(x => Array(7).fill(false)),
-      isWin: 'Can you reproduce this?',
-      final: [
-        [false, false, true, true, true, false, false],
-        [false, true, false, false, false, true, false],
-        [false, true, false, false, false, true, false],
-        [false, true, false, false, false, true, false],
-        [false, false, true, true, true, false, false],
-      ]
+      isWin: false
     };
 
+    this.state.final = levels[this.state.level];
+
     this.checkResult = this.checkResult.bind(this);
+    this.resetBoard = this.resetBoard.bind(this);
   }
 
   toggleSquare(squares, x, y) {
@@ -40,6 +36,12 @@ class Board extends Component {
     } else {
       squares[x][y] = true;
     }
+  }
+
+  resetBoard() {
+    this.setState({
+      squares: Array(5).fill(false).map(x => Array(7).fill(false))
+    });
   }
 
   handleClick(x, y) {
@@ -58,10 +60,19 @@ class Board extends Component {
   
   checkResult() {
     if (_.isEqual(this.state.squares, this.state.final)) {
-      this.setState({isWin : 'You rock!' });
+      this.setState({ isWin: true });
     } else {
-      this.setState({isWin : 'Can you reproduce this?' });
+      this.setState({isWin: false });
     }
+  }
+
+  nextLevel() {
+    this.setState({
+      isWin: false,
+      final: levels[this.state.level + 1],
+      level: this.state.level + 1
+    });
+    this.resetBoard();
   }
 
   renderSquare(x, y) {
@@ -89,7 +100,13 @@ class Board extends Component {
       <div className="game">
         <div className="preview">
           <div className="title">
-            <h1>{this.state.isWin}</h1>
+            {this.state.isWin ? (
+              <div>
+              <h1>You rock! <a onClick={() => this.nextLevel()}>Next level ?</a></h1>
+              </div>
+            ) : (
+              <h1>Can you reproduce this?</h1>
+            )}
           </div>
           <div className="final">
             <div className="board-row">
