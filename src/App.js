@@ -71,6 +71,7 @@ class Board extends Component {
   }
 
   nextLevel() {
+    if (!levels[this.state.level + 1]) { return; }
     this.setState({
       isWin: false,
       final: levels[this.state.level + 1],
