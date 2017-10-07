@@ -1,0 +1,50 @@
+.game {
+  display: flex;
+  align-items: center;
+  height: 100vh;
+}
+
+.game-board {
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border: 2px solid #f1f1f1;
+  border-radius: 3px;
+}
+
+.board-row {
+  display: flex;
+}
+
+.square {
+  height: 140px;
+  display: flex;
+  width: 140px;
+  background-color: #f1f1f1;
+  margin: 5px;
+  align-items: center;
+  justify-content: center;
+  color: #d2d2d2;
+  font-size: 32px;
+  border-radius: 3px;
+}
+
+.active {
+  background-color: #d2d2d2;
+  color: #f1f1f1;
+}
+
+.square:active {
+  border: 5px solid #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
