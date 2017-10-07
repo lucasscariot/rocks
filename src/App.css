@@ -1,15 +1,14 @@
 .game {
   display: flex;
   align-items: center;
+  flex-direction: column;
   height: 100vh;
 }
 
 .game-board {
-  margin: auto;
   padding: 10px;
   border: 2px solid #f1f1f1;
   border-radius: 3px;
-  width: 50%;
 }
 
 .board-row {
@@ -17,13 +16,17 @@
   width: 100%;
 }
 
-.square {
-  height: 140px;
+.test {
+  font-size: 32px;
+  color: red;
+}
+
+.game-board .square {
+  height: 80px;
+  width: 80px;
   display: flex;
-  max-width: 140px;
-  width: 100%;
-  background-color: #f1f1f1;
-  margin: 5px;
+  background-color: rgb(235, 237, 240);
+  margin: 3px;
   align-items: center;
   justify-content: center;
   color: #d2d2d2;
@@ -31,21 +34,52 @@
   border-radius: 3px;
 }
 
-.active {
-  background-color: #d2d2d2;
+.game-board .square:active {
+  box-shadow:0px 0px 0px 5px white inset;
+  border-radius: 7px;
+}
+
+.game-board .active {
+  background-color: rgb(198, 228, 139);
   color: #f1f1f1;
 }
 
-.square:active {
-  box-shadow:0px 0px 0px 5px white inset;
-  border-radius: 7px;
+.preview {
+  margin: 40px;
+  display: flex;
+  width: 550px;
+}
 
+.title {
+  width: 60%;
+  font-variant-caps: all-small-caps;
+  color: #626262;
+  margin: auto 0px;
+}
+
+.preview .final {
+  margin-left: auto;
+}
+
+.preview .square {
+  height: 20px;
+  width: 20px;
+  display: flex;
+  background-color: rgb(235, 237, 240);
+  margin: 1px;
+  align-items: center;
+  justify-content: center;
+  color: #d2d2d2;
+  font-size: 32px;
+  border-radius: 1px;
+}
+
+.preview .active {
+  background-color: rgb(198, 228, 139);
 }
 
 * {
   box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
 }
 
 @media only screen and (min-width: 576px;){
