@@ -6,22 +6,22 @@
 
 .game-board {
   margin: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   padding: 10px;
   border: 2px solid #f1f1f1;
   border-radius: 3px;
+  width: 50%;
 }
 
 .board-row {
   display: flex;
+  width: 100%;
 }
 
 .square {
   height: 140px;
   display: flex;
-  width: 140px;
+  max-width: 140px;
+  width: 100%;
   background-color: #f1f1f1;
   margin: 5px;
   align-items: center;
@@ -37,11 +37,21 @@
 }
 
 .square:active {
-  border: 5px solid #ffffff;
+  box-shadow:0px 0px 0px 5px white inset;
+  border-radius: 7px;
+
 }
 
 * {
   box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+@media only screen and (min-width: 576px;){
+  .game-board {
+    width: 100%;
+  }
 }
 
 @keyframes App-logo-spin {
