@@ -112,10 +112,11 @@ class Board extends Component {
           <div className="title">
             {this.state.isWin ? (
               <div>
-              <h1>You rock! <a onClick={() => this.nextLevel()}>Next level ?</a></h1>
+
+              <h1>Ты гений! <a onClick={() => this.nextLevel()}>Следующий уровень?</a></h1>
               </div>
             ) : (
-              <h1>Can you reproduce this?</h1>
+              <h1>Можешь воспроизвезти картинку?</h1>
             )}
           </div>
           <div className="final">
@@ -215,9 +216,9 @@ class Board extends Component {
             </div>
           </div>
           <div className="data">
-            <p>Click: {this.state.clicks}</p>
-            <p><a onClick={() => this.resetBoard()}>Reset board</a></p>
-            <p>Level: {this.state.level}</p>
+            <p>Количество кликов: {this.state.clicks}</p>
+            <p><a onClick={() => this.resetBoard()}>Сбросить доску</a></p>
+            <p>Уровень: {this.state.level}</p>
           </div>
         </div>
       </div>
