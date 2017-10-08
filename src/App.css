@@ -2,6 +2,9 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+  width: 50%;
+  min-width: 300px;
+  margin: auto;
 }
 
 .game a {
@@ -17,6 +20,7 @@
   padding: 10px;
   border: 2px solid #f1f1f1;
   border-radius: 3px;
+  width: 100%;
 }
 
 .board-row {
@@ -31,8 +35,8 @@
 }
 
 .game-board .square {
-  height: 80px;
-  width: 80px;
+  height: 100%;
+  width: 100%;
   display: flex;
   background-color: rgb(235, 237, 240);
   margin: 3px;
@@ -41,6 +45,11 @@
   color: #d2d2d2;
   font-size: 32px;
   border-radius: 3px;
+}
+.game-board .square:after {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
 }
 
 .game-board .active {
@@ -51,7 +60,8 @@
 .preview {
   margin: 40px;
   display: flex;
-  width: 550px;
+  width: 100%;
+  padding: 0px 30px;
 }
 
 .title {
