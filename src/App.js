@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import levels from './levels.json';
+import Analytics from 'analytics-node';
 import _ from 'lodash';
 import './App.css';
+
+const segment = new Analytics('vKwrOhj4ag1OSWsQ7ogrwGO9IesU6DA2');
 
 class Square extends Component {
   render() {
@@ -43,6 +46,7 @@ class Board extends Component {
       squares: Array(5).fill(false).map(x => Array(7).fill(0)),
       isWin: false
     });
+    segment.track({ event: 'Reset Board', anonymousId: '1' });
   }
 
   handleClick(x, y) {
@@ -72,6 +76,7 @@ class Board extends Component {
 
   nextLevel() {
     if (!levels[this.state.level + 1]) { return; }
+    segment.track({ event: 'Next Level', anonymousId: '1' });
     this.setState({
       isWin: false,
       final: levels[this.state.level + 1],
