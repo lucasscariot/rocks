@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import levels from './levels.json';
 import Analytics from 'analytics-node';
+import Cookies from 'universal-cookie';
+import moment from 'moment';
 import _ from 'lodash';
 import './App.css';
 
+const cookies = new Cookies();
 const segment = new Analytics('vKwrOhj4ag1OSWsQ7ogrwGO9IesU6DA2');
 
 class Square extends Component {
@@ -19,16 +22,22 @@ class Square extends Component {
 class Board extends Component {
   constructor() {
     super();
+
     this.state = {
-      level: 0,
-      clicks: 0,
-      squares: Array(5).fill(false).map(x => Array(7).fill(0)),
-      final: levels[0],
+      level: _.toInteger(cookies.get('level')) || 0,
+      clicks: _.toInteger(cookies.get('clicks')) || 0,
+      squares: cookies.get('squares') || Array(5).fill(false).map(x => Array(7).fill(0)),
+      final: levels[cookies.get('level') || 0],
       isWin: false
     };
 
     this.checkResult = this.checkResult.bind(this);
     this.resetBoard = this.resetBoard.bind(this);
+    this.cookieSave = this.cookieSave.bind(this);
+  }
+
+  componentWillMount() {
+    this.checkResult();
   }
 
   toggleSquare(squares, x, y) {
@@ -41,11 +50,26 @@ class Board extends Component {
     }
   }
 
+  cookieSave() {
+    cookies.set('level', this.state.level, {
+      maxAge: moment().add(1, 'years'),
+      path: '/',
+    });
+    cookies.set('squares', this.state.squares, {
+      maxAge: moment().add(1, 'years'),
+      path: '/',
+    });
+    cookies.set('clicks', this.state.clicks, {
+      maxAge: moment().add(1, 'years'),
+      path: '/',
+    });
+  }
+
   resetBoard() {
     this.setState({
       squares: Array(5).fill(false).map(x => Array(7).fill(0)),
       isWin: false
-    });
+    }, () => this.cookieSave());
     segment.track({ event: 'Reset Board', anonymousId: '1' });
   }
 
@@ -62,7 +86,7 @@ class Board extends Component {
     this.setState({
       squares: squares,
       clicks: this.state.clicks + 1
-    });
+    }, () => this.cookieSave());
     this.checkResult();
   }
   
@@ -74,6 +98,14 @@ class Board extends Component {
     }
   }
 
+  startOver() {
+    this.setState({
+      level: 0,
+      clicks: 0,
+      final: levels[0],
+    }, () => this.resetBoard());
+  }
+
   nextLevel() {
     if (!levels[this.state.level + 1]) { return; }
     segment.track({ event: 'Next Level', anonymousId: '1' });
@@ -81,8 +113,7 @@ class Board extends Component {
       isWin: false,
       final: levels[this.state.level + 1],
       level: this.state.level + 1
-    });
-    this.resetBoard();
+    }, () => this.resetBoard());
   }
 
   renderSquare(x, y) {
@@ -217,6 +248,7 @@ class Board extends Component {
           <div className="data">
             <p>Click: {this.state.clicks}</p>
             <p><a onClick={() => this.resetBoard()}>Reset board</a></p>
+            <p><a onClick={() => this.startOver()}>Start Over</a></p>
             <p>Level: {this.state.level}</p>
           </div>
         </div>
