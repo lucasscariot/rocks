@@ -1,8 +1,7 @@
-# RockGame
-> https://rocks-game.herokuapp.com
-
+# Rocks
+> https://lucasscariot.github.io/rocks/
 ```
-git clone https://github.com/lucasscariot/rock-game.git && cd rock-game
+git clone https://github.com/lucasscariot/rocks.git && cd rocks
 ```
 
 ## How to launch it
