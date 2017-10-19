@@ -1,9 +1,11 @@
 {
   "name": "game",
   "version": "0.1.0",
+  "homepage": "https://lucasscariot.github.io/rocks",
   "private": true,
   "dependencies": {
     "analytics-node": "^3.0.0",
+    "gh-pages": "^1.0.0",
     "lodash": "^4.17.4",
     "moment": "^2.19.1",
     "react": "^16.0.0",
@@ -13,6 +15,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
