@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Square from './Square';
 import levels from './levels.json';
 import Cookies from 'universal-cookie';
 import moment from 'moment';
@@ -6,16 +7,6 @@ import _ from 'lodash';
 import './App.css';
 
 const cookies = new Cookies();
-
-class Square extends Component {
-  render() {
-    return (
-      <div className={'square ' + (this.props.value ? 'active' : '')}
-      onClick={() => this.props.onClick()}>
-      </div>
-    );
-  }
-}
 
 class Board extends Component {
   constructor() {
@@ -188,7 +179,6 @@ class Board extends Component {
                 )}
               </div>
             )}
-
           </div>
         </div>
       </div>
