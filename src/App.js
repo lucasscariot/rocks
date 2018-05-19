@@ -143,7 +143,7 @@ class Board extends Component {
             <div className="title">
               {this.state.isWin ? (
                 <div>
-                <h1>You rock! <a onClick={() => this.nextLevel()}>Next level ?</a></h1>
+                  <h1>You rock!</h1>
                 </div>
               ) : (
                 <h1>Can you reproduce this?</h1>
@@ -160,12 +160,18 @@ class Board extends Component {
             </div>
           </div>
           <div className="data">
-            <a className="btn" onClick={() => this.resetBoard()}>Reset board</a>
+            {this.state.isWin ? 
+              <a className="btn" onClick={() => this.nextLevel()}>Next level</a> :
+              <a className="btn" onClick={() => this.resetBoard()}>Reset board</a>
+            }
             <div className="box">
               <h3>score</h3>
               <p>{this.state.level}:{this.state.clicks}</p>
             </div>
-            <a className="btn" onClick={() => this.startOver()}>Start Over</a>
+            {this.state.isWin ? 
+              <a className="btn" onClick={() => this.nextLevel()}>Next level</a> :
+              <a className="btn" onClick={() => this.startOver()}>Start Over</a>
+            }
           </div>
           <div className="game-board">
             {Array.apply(null, Array(5)).map((c, x)=>
